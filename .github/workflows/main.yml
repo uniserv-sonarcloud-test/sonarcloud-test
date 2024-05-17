@@ -43,6 +43,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONARCLOUDTOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"uniserv-sonarcloud-test_sonarcloud-test" /o:"uniserv-sonarcloud-test" /d:sonar.token="${{ secrets.SONARCLOUDTOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"uniserv-sonarcloud-test_sonarcloud-test" /o:"uniserv-sonarcloud-test" /d:sonar.token="${{ env.SONAR_TOKEN}}" /d:sonar.host.url="https://sonarcloud.io"
+          echo ${{ env.SONAR_TOKEN}}
           dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token=" ${{ secrets.SONARCLOUDTOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.token=" ${{ env.SONAR_TOKEN}}"
